@@ -1,7 +1,7 @@
-package jp.fukicycle.jashter.controller
+package jp.fukicycle.jashter.api.controller
 
-import jp.fukicycle.jashter.model.User
-import jp.fukicycle.jashter.service.IUserService
+import jp.fukicycle.jashter.api.model.User
+import jp.fukicycle.jashter.api.service.IUserService
 import org.springframework.security.core.Authentication
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.RequestMapping

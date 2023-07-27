@@ -1,4 +1,4 @@
-package jp.fukicycle.jashter.model
+package jp.fukicycle.jashter.api.model
 
 import jakarta.persistence.Column
 import jakarta.persistence.Entity

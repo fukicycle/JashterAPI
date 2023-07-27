@@ -1,6 +1,6 @@
-package jp.fukicycle.jashter.service
+package jp.fukicycle.jashter.api.service
 
-import jp.fukicycle.jashter.model.User
+import jp.fukicycle.jashter.api.model.User
 
 interface ITokenService {
     fun generate(user: User): String

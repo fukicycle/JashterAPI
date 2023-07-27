@@ -1,4 +1,4 @@
-package jp.fukicycle.jashter.config
+package jp.fukicycle.jashter.api.config
 
 import com.nimbusds.jose.jwk.source.ImmutableSecret
 import com.nimbusds.jose.proc.SecurityContext

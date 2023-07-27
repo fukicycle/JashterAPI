@@ -1,6 +1,6 @@
-package jp.fukicycle.jashter.config
+package jp.fukicycle.jashter.api.config
 
-import jp.fukicycle.jashter.service.ITokenService
+import jp.fukicycle.jashter.api.service.ITokenService
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
 import org.springframework.http.HttpMethod

@@ -1,4 +1,4 @@
-package jp.fukicycle.jashter.dto
+package jp.fukicycle.jashter.api.dto
 
 import org.springframework.http.HttpStatus
 import org.springframework.http.HttpStatusCode

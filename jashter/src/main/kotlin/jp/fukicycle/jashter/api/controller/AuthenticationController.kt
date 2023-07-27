@@ -1,10 +1,10 @@
-package jp.fukicycle.jashter.controller
+package jp.fukicycle.jashter.api.controller
 
-import jp.fukicycle.jashter.dto.LoginDto
-import jp.fukicycle.jashter.dto.LoginResponseDto
-import jp.fukicycle.jashter.service.AuthenticationService
-import jp.fukicycle.jashter.service.IAuthenticationService
-import jp.fukicycle.jashter.service.UserService
+import jp.fukicycle.jashter.api.dto.LoginDto
+import jp.fukicycle.jashter.api.dto.LoginResponseDto
+import jp.fukicycle.jashter.api.service.AuthenticationService
+import jp.fukicycle.jashter.api.service.IAuthenticationService
+import jp.fukicycle.jashter.api.service.UserService
 import org.springframework.http.HttpStatus
 import org.springframework.http.HttpStatusCode
 import org.springframework.web.bind.annotation.PostMapping

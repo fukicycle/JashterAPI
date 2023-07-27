@@ -1,4 +1,4 @@
-package jp.fukicycle.jashter.dto
+package jp.fukicycle.jashter.api.dto
 
 data class LoginDto(
         val username: String,

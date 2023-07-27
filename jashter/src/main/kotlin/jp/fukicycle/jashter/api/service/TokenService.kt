@@ -1,6 +1,6 @@
-package jp.fukicycle.jashter.service
+package jp.fukicycle.jashter.api.service
 
-import jp.fukicycle.jashter.model.User
+import jp.fukicycle.jashter.api.model.User
 import org.springframework.security.oauth2.jwt.JwsHeader
 import org.springframework.security.oauth2.jwt.JwtClaimsSet
 import org.springframework.security.oauth2.jwt.JwtDecoder

@@ -1,6 +1,6 @@
-package jp.fukicycle.jashter.service
+package jp.fukicycle.jashter.api.service
 
-import jp.fukicycle.jashter.repsitory.IUserRepository
+import jp.fukicycle.jashter.api.repsitory.IUserRepository
 import org.springframework.stereotype.Service
 
 @Service

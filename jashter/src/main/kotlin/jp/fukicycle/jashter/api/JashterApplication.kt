@@ -1,4 +1,4 @@
-package jp.fukicycle.jashter
+package jp.fukicycle.jashter.api
 
 import org.springframework.boot.autoconfigure.SpringBootApplication
 import org.springframework.boot.runApplication

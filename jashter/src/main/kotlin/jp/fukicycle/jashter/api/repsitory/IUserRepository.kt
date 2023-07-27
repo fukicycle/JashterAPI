@@ -1,6 +1,6 @@
-package jp.fukicycle.jashter.repsitory
+package jp.fukicycle.jashter.api.repsitory
 
-import jp.fukicycle.jashter.model.User
+import jp.fukicycle.jashter.api.model.User
 import org.springframework.data.repository.CrudRepository
 import org.springframework.stereotype.Repository
 

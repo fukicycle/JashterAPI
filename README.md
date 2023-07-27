@@ -2,7 +2,7 @@
 ## Requirements
 - Spring Boot 3.1.2
 - Java8
-- application.properties is bellow
+- application.properties is below
   ```
   spring.datasource.url=jdbc:sqlserver://[HOST];databaseName=[DB_NAME];trustServerCertificate=true;
   spring.datasource.username=[DB_USERNAME]

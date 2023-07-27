@@ -31,7 +31,7 @@ jobs:
     - name: Make Gradle executable
       run: |
         ls -la
-        chmod +x ./gradlew
+        chmod +x ./JashterAPI/gradlew
     #ビルドして単体テストレポート出力(Jacoco)
     - name: Build with Gradle(Jacoco)
       run: ./gradlew build

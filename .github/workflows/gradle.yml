@@ -28,11 +28,8 @@ jobs:
       with:
         java-version: '8'
         distribution: 'adopt'
-    - name: check current directory
-      run:
-        ls -la
-    - name: Build with Gradle
-      uses: gradle/gradle-build-action@bd5760595778326ba7f1441bcf7e88b49de61a25 # v2.6.0
-      with:
-        gradle-version: 8.2.1
-        arguments: build
+    - name: Make Gradle executable
+      run: chmod +x ./gradlew
+    #ビルドして単体テストレポート出力(Jacoco)
+    - name: Build with Gradle(Jacoco)
+      run: ./gradlew build

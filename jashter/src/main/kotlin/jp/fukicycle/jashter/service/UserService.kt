@@ -8,7 +8,11 @@ import org.springframework.stereotype.Service
 class UserService(
         private val userRepository: IUserRepository
 ) : IUserService {
-    override fun findById(id: Int): User {
+    override fun findById(id: Long): User {
         return userRepository.findById(id).orElseThrow()
+    }
+
+    override fun findAll(): List<User> {
+        return userRepository.findAll().toList()
     }
 }

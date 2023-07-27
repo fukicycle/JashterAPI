@@ -30,7 +30,7 @@ class TokenService(
     override fun parse(token: String): User? {
         return try {
             val jwt = jwtDecoder.decode(token)
-            val userId = jwt.claims["userId"] as Int
+            val userId = jwt.claims["userId"] as Long
             userService.findById(userId)
         } catch (e: Exception) {
             null

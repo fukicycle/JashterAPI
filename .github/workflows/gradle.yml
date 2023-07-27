@@ -30,8 +30,8 @@ jobs:
         distribution: 'adopt'
     - name: Make Gradle executable
       run: |
-        ls -la
-        chmod +x ./JashterAPI/gradlew
+        ls -la ./jashter
+        chmod +x ./jashter/gradlew
     #ビルドして単体テストレポート出力(Jacoco)
     - name: Build with Gradle(Jacoco)
       run: ./gradlew build

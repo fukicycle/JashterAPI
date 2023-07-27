@@ -31,6 +31,7 @@ jobs:
     - name: Make Gradle executable
       run: |
         ls -la ./jashter
-        chmod +x ./jashter/gradlew
+        cd ./jashter
+        chmod +x ./gradlew
     - name: Build with Gradle
-      run: ./jashter/gradlew build
+      run: ./gradlew build

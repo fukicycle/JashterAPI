@@ -34,4 +34,6 @@ jobs:
         cd ./jashter
         chmod +x ./gradlew
     - name: Build with Gradle
-      run: ./gradlew build
+      run: |
+        cd ./jashter
+        ./gradlew build

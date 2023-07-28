@@ -1,4 +1,4 @@
-# JashterAPI
+# JashterAPI(ジャスターAPI)
 ## Requirements
 - Spring Boot 3.1.2
 - Java8

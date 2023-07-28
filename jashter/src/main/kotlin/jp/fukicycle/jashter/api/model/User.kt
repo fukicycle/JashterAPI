@@ -1,14 +1,13 @@
 package jp.fukicycle.jashter.api.model
 
-import jakarta.persistence.Column
-import jakarta.persistence.Entity
-import jakarta.persistence.Id
-import jakarta.persistence.Table
+import jakarta.persistence.*
 
 @Entity
-@Table(name = "users")
+@Table(name = "Users")
 data class User(
         @Id
+        @GeneratedValue(strategy = GenerationType.IDENTITY)
+        @Column(name = "ID")
         val id:Long,
         @Column(name = "Username")
         val username:String,

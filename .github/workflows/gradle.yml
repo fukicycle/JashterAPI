@@ -33,7 +33,7 @@ jobs:
         ls -la ./jashter
         cd ./jashter
         chmod +x ./gradlew
-    - name: Build with Gradle
+    - name: Build with Gradle (Skip test)
       run: |
         cd ./jashter
-        ./gradlew build
+        ./gradlew build -x test

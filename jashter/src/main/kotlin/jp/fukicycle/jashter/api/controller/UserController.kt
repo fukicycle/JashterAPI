@@ -14,8 +14,8 @@ class UserController(
         private val userService: IUserService
 ) {
     @GetMapping("/get")
-    fun get(authentication:Authentication): List<User> {
-        println(authentication.principal as User)
-        return userService.findAll()
+    fun get(authentication: Authentication): User {
+        val user = authentication.principal as User
+        return userService.findById(user.id)
     }
 }

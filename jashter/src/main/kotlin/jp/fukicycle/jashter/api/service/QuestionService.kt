@@ -27,7 +27,7 @@ class QuestionService : IQuestionService {
             }
             choice.add(QuestionChoice(meaningOfWord.wordId, meaningOfWord.id, meaningOfWord.meaning))
             choice.shuffle()
-            items.add(QuestionResponseDto(meaningOfWord.id, levelId, partOfSpeechId, choice))
+            items.add(QuestionResponseDto(meaningOfWord.wordId, meaningOfWord.id, levelId, partOfSpeechId, choice))
         }
         return items
     }

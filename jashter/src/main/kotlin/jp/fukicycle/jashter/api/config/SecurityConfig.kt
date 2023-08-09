@@ -19,13 +19,17 @@ import org.springframework.security.web.SecurityFilterChain
 import org.springframework.web.cors.CorsConfiguration
 import org.springframework.web.cors.CorsConfigurationSource
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource
+import org.springframework.web.servlet.config.annotation.CorsRegistry
+import org.springframework.web.servlet.config.annotation.EnableWebMvc
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurer
 
 
 @Configuration
 @EnableWebSecurity
+@EnableWebMvc
 class SecurityConfig(
         private val tokenService: ITokenService,
-) {
+) : WebMvcConfigurer {
     @Bean
     @Throws(Exception::class)
     fun securityFilterChain(http: HttpSecurity): SecurityFilterChain? {
@@ -49,15 +53,11 @@ class SecurityConfig(
                 }
                 .build()
     }
-
-    @Bean
-    fun corsConfigurationSource(): CorsConfigurationSource {
-        val configuration = CorsConfiguration()
-        configuration.allowedOrigins = listOf("http://localhost:3000", "http://localhost:8080")
-        configuration.allowedMethods = listOf("GET", "POST", "PUT")
-        configuration.allowedHeaders = listOf("Authorization", "content-type")
-        val source = UrlBasedCorsConfigurationSource()
-        source.registerCorsConfiguration("/**", configuration)
-        return source
+    override fun addCorsMappings(registry: CorsRegistry){
+        registry.addMapping("/**")
+            .allowedOrigins("http://localhost:5058") // 許可するオリジンを指定
+            .allowedMethods("GET", "POST", "PUT")
+            .allowedHeaders("Authorization","content-type","Access-Control-Allow-Origin")
+            .allowCredentials(true);
     }
 }

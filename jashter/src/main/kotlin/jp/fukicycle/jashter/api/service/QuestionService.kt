@@ -22,7 +22,7 @@ class QuestionService : IQuestionService {
         val meaningOfWords = meaningOfWordRepository.findAllByLevelIdAndPartOfSpeechId(levelId, partOfSpeechId)
         for (meaningOfWord in meaningOfWords) {
             val choice = mutableListOf<QuestionChoice>()
-            getRandomChoice(meaningOfWord.wordId).forEach {
+            getRandomChoice(meaningOfWord.wordId, meaningOfWord.partOfSpeechId).forEach {
                 choice.add(QuestionChoice(it.wordId, it.id, it.meaning))
             }
             choice.add(QuestionChoice(meaningOfWord.wordId, meaningOfWord.id, meaningOfWord.meaning))
@@ -32,9 +32,9 @@ class QuestionService : IQuestionService {
         return items
     }
 
-    private fun getRandomChoice(baseWordId: Long): List<MeaningOfWord> {
+    private fun getRandomChoice(baseWordId: Long, partOfSpeechId: Long): List<MeaningOfWord> {
         val items = mutableListOf<MeaningOfWord>()
-        val meaningOfWords = meaningOfWordRepository.findAll().filter { a -> a.wordId != baseWordId }
+        val meaningOfWords = meaningOfWordRepository.findAll().filter { a -> a.wordId != baseWordId && a.partOfSpeechId == partOfSpeechId }
         var count = 0;
         while (true) {
             val random = meaningOfWords.random()

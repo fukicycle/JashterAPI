@@ -7,5 +7,5 @@ import org.springframework.boot.runApplication
 class JashterApplication
 
 fun main(args: Array<String>) {
-	runApplication<JashterApplication>(*args)
+    runApplication<JashterApplication>(*args)
 }

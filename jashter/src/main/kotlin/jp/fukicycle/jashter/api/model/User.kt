@@ -8,19 +8,19 @@ data class User(
         @Id
         @GeneratedValue(strategy = GenerationType.IDENTITY)
         @Column(name = "ID")
-        val id:Long,
+        val id: Long,
         @Column(name = "Username")
-        val username:String,
+        val username: String,
         @Column(name = "Password")
-        val password:String,
+        val password: String,
         @Column(name = "FirstName")
-        val firstName:String,
+        val firstName: String,
         @Column(name = "LastName")
-        val lastName:String,
+        val lastName: String,
         @Column(name = "Icon")
-        val icon:String,
+        val icon: String,
         @Column(name = "Token")
-        val token:String,
+        val token: String,
         @Column(name = "NickName")
-        val nickname:String
+        val nickname: String
 )

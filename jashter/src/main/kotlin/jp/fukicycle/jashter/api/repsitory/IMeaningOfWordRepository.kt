@@ -7,5 +7,5 @@ import org.springframework.stereotype.Repository
 
 @Repository
 interface IMeaningOfWordRepository : CrudRepository<MeaningOfWord, Long> {
-    fun findAllByLevelIdAndPartOfSpeechId(levelId:Long,partOfSpeechId:Long):List<MeaningOfWord>
+    fun findAllByLevelIdAndPartOfSpeechId(levelId: Long, partOfSpeechId: Long): List<MeaningOfWord>
 }

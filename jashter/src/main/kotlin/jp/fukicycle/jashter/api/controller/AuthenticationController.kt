@@ -7,6 +7,7 @@ import jp.fukicycle.jashter.api.service.IAuthenticationService
 import jp.fukicycle.jashter.api.service.UserService
 import org.springframework.http.HttpStatus
 import org.springframework.http.HttpStatusCode
+import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.CrossOrigin
 import org.springframework.web.bind.annotation.PostMapping
 import org.springframework.web.bind.annotation.RequestBody
@@ -20,15 +21,16 @@ class AuthenticationController(
 ) {
 
     @PostMapping("/login")
-    fun login(@RequestBody loginDto: LoginDto): LoginResponseDto {
+    fun login(@RequestBody loginDto: LoginDto): ResponseEntity<LoginResponseDto> {
         val result = authenticationService.login(loginDto.username, loginDto.password)
-        return if (result == null) LoginResponseDto(null, HttpStatus.BAD_REQUEST)
-        else LoginResponseDto(result, HttpStatus.OK)
+        val responseDto = LoginResponseDto(result)
+        return if (result == null) ResponseEntity.badRequest().body(responseDto)
+        else ResponseEntity.ok(responseDto)
     }
 
     @RequestMapping("/login")
-    fun optionsLogin(): HttpStatusCode {
-        return HttpStatus.OK
+    fun optionsLogin(): ResponseEntity<String> {
+        return ResponseEntity.ok("OK")
     }
 
 }

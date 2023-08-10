@@ -15,7 +15,6 @@ import org.springframework.web.bind.annotation.RestController
 
 @RestController
 @RequestMapping("/api")
-@CrossOrigin
 class AuthenticationController(
         private val authenticationService: IAuthenticationService
 ) {
@@ -25,6 +24,11 @@ class AuthenticationController(
         val result = authenticationService.login(loginDto.username, loginDto.password)
         return if (result == null) LoginResponseDto(null, HttpStatus.BAD_REQUEST)
         else LoginResponseDto(result, HttpStatus.OK)
+    }
+
+    @RequestMapping("/login")
+    fun optionsLogin(): HttpStatusCode {
+        return HttpStatus.OK
     }
 
 }

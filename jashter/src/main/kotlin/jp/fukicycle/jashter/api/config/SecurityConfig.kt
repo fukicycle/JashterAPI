@@ -16,9 +16,6 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority
 import org.springframework.security.oauth2.server.resource.InvalidBearerTokenException
 import org.springframework.security.oauth2.server.resource.authentication.BearerTokenAuthenticationToken
 import org.springframework.security.web.SecurityFilterChain
-import org.springframework.web.cors.CorsConfiguration
-import org.springframework.web.cors.CorsConfigurationSource
-import org.springframework.web.cors.UrlBasedCorsConfigurationSource
 import org.springframework.web.servlet.config.annotation.CorsRegistry
 import org.springframework.web.servlet.config.annotation.EnableWebMvc
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer
@@ -26,16 +23,16 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer
 
 @Configuration
 @EnableWebSecurity
-@EnableWebMvc
 class SecurityConfig(
         private val tokenService: ITokenService,
-) : WebMvcConfigurer {
+) {
     @Bean
     @Throws(Exception::class)
     fun securityFilterChain(http: HttpSecurity): SecurityFilterChain? {
         return http
                 .csrf { csrf: CsrfConfigurer<HttpSecurity> -> csrf.disable() }
                 .authorizeRequests { auth ->
+                    auth.requestMatchers(HttpMethod.OPTIONS,"/**").permitAll()
                     auth.requestMatchers(HttpMethod.POST, "/api/login").permitAll()
                             .anyRequest().authenticated()
                 }
@@ -53,11 +50,17 @@ class SecurityConfig(
                 }
                 .build()
     }
-    override fun addCorsMappings(registry: CorsRegistry){
-        registry.addMapping("/**")
-            .allowedOrigins("http://localhost:5058") // 許可するオリジンを指定
-            .allowedMethods("GET", "POST", "PUT")
-            .allowedHeaders("Authorization","content-type","Access-Control-Allow-Origin")
-            .allowCredentials(true);
+
+    @Bean
+    fun corsConfigurer(): WebMvcConfigurer {
+        return object : WebMvcConfigurer {
+            override fun addCorsMappings(registry: CorsRegistry) {
+                registry.addMapping("/**")
+                        .allowedOrigins("http://localhost:5058")
+                        .allowedMethods("GET", "POST", "PUT", "OPTIONS")
+                        .allowedHeaders("Authorization", "content-type")
+                        .allowCredentials(true)
+            }
+        }
     }
 }

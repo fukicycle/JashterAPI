@@ -56,7 +56,7 @@ class SecurityConfig(
         return object : WebMvcConfigurer {
             override fun addCorsMappings(registry: CorsRegistry) {
                 registry.addMapping("/**")
-                        .allowedOrigins("http://localhost:5058")
+                        .allowedOrigins("http://localhost:5058","https://fukicycle.github.io/")
                         .allowedMethods("GET", "POST", "PUT", "OPTIONS")
                         .allowedHeaders("Authorization", "content-type")
                         .allowCredentials(true)

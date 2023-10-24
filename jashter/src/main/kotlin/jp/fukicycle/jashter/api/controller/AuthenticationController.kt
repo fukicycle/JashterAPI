@@ -3,6 +3,7 @@ package jp.fukicycle.jashter.api.controller
 import jp.fukicycle.jashter.api.dto.request.LoginRequestDto
 import jp.fukicycle.jashter.api.dto.response.LoginResponseDto
 import jp.fukicycle.jashter.api.service.IAuthenticationService
+import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.PostMapping
 import org.springframework.web.bind.annotation.RequestBody
@@ -11,9 +12,9 @@ import org.springframework.web.bind.annotation.RestController
 
 @RestController
 @RequestMapping("/api")
-class AuthenticationController(
-        private val authenticationService: IAuthenticationService
-) {
+class AuthenticationController {
+    @Autowired
+    lateinit var authenticationService: IAuthenticationService
 
     @PostMapping("/login")
     fun login(@RequestBody loginRequestDto: LoginRequestDto): ResponseEntity<LoginResponseDto> {

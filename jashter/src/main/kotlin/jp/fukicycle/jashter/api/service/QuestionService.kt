@@ -12,9 +12,6 @@ import org.springframework.stereotype.Service
 class QuestionService : IQuestionService {
 
     @Autowired
-    lateinit var wordRepository: IWordRepository
-
-    @Autowired
     lateinit var meaningOfWordRepository: IMeaningOfWordRepository
     override fun create(levelId: Long, partOfSpeechId: Long): List<QuestionResponseDto> {
         val items = mutableListOf<QuestionResponseDto>()

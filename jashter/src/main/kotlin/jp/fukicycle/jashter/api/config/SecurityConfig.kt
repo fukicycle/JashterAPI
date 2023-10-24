@@ -1,6 +1,7 @@
 package jp.fukicycle.jashter.api.config
 
 import jp.fukicycle.jashter.api.service.ITokenService
+import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
 import org.springframework.http.HttpMethod
@@ -23,32 +24,37 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer
 
 @Configuration
 @EnableWebSecurity
-class SecurityConfig(
-        private val tokenService: ITokenService,
-) {
+class SecurityConfig {
+    @Autowired
+    lateinit var tokenService: ITokenService
+
     @Bean
     @Throws(Exception::class)
     fun securityFilterChain(http: HttpSecurity): SecurityFilterChain? {
         return http
-                .csrf { csrf: CsrfConfigurer<HttpSecurity> -> csrf.disable() }
-                .authorizeRequests { auth ->
-                    auth.requestMatchers(HttpMethod.OPTIONS,"/**").permitAll()
-                    auth.requestMatchers(HttpMethod.POST, "/api/login").permitAll()
-                            .anyRequest().authenticated()
-                }
-                .oauth2ResourceServer { obj: OAuth2ResourceServerConfigurer<HttpSecurity?> -> obj.jwt {} }
-                .sessionManagement { session: SessionManagementConfigurer<HttpSecurity?> -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS) }
-                .httpBasic(withDefaults())
-                .headers { headers ->
-                    headers.frameOptions { frameOptions -> frameOptions.disable() }
-                            .xssProtection { xssProtection -> xssProtection.disable() }
-                }
-                .authenticationManager { authenticationManager ->
-                    val jwt = authenticationManager as BearerTokenAuthenticationToken
-                    val user = tokenService.parse(jwt.token) ?: throw InvalidBearerTokenException("Invalid token")
-                    UsernamePasswordAuthenticationToken(user, "", listOf(SimpleGrantedAuthority("USER")))
-                }
-                .build()
+            .csrf { csrf: CsrfConfigurer<HttpSecurity> -> csrf.disable() }
+            .authorizeRequests { auth ->
+                auth.requestMatchers(HttpMethod.OPTIONS, "/**").permitAll()
+                auth.requestMatchers(HttpMethod.POST, "/api/login").permitAll()
+                    .anyRequest().authenticated()
+            }
+            .oauth2ResourceServer { obj: OAuth2ResourceServerConfigurer<HttpSecurity?> -> obj.jwt {} }
+            .sessionManagement { session: SessionManagementConfigurer<HttpSecurity?> ->
+                session.sessionCreationPolicy(
+                    SessionCreationPolicy.STATELESS
+                )
+            }
+            .httpBasic(withDefaults())
+            .headers { headers ->
+                headers.frameOptions { frameOptions -> frameOptions.disable() }
+                    .xssProtection { xssProtection -> xssProtection.disable() }
+            }
+            .authenticationManager { authenticationManager ->
+                val jwt = authenticationManager as BearerTokenAuthenticationToken
+                val user = tokenService.parse(jwt.token) ?: throw InvalidBearerTokenException("Invalid token")
+                UsernamePasswordAuthenticationToken(user, "", listOf(SimpleGrantedAuthority("USER")))
+            }
+            .build()
     }
 
     @Bean
@@ -56,10 +62,10 @@ class SecurityConfig(
         return object : WebMvcConfigurer {
             override fun addCorsMappings(registry: CorsRegistry) {
                 registry.addMapping("/**")
-                        .allowedOrigins("http://localhost:5058","https://fukicycle.github.io/")
-                        .allowedMethods("GET", "POST", "PUT", "OPTIONS")
-                        .allowedHeaders("Authorization", "content-type")
-                        .allowCredentials(true)
+                    .allowedOrigins("http://localhost:5058", "https://fukicycle.github.io/")
+                    .allowedMethods("GET", "POST", "PUT", "OPTIONS")
+                    .allowedHeaders("Authorization", "content-type")
+                    .allowCredentials(true)
             }
         }
     }

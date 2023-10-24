@@ -5,6 +5,6 @@ data class UserResponseDto(
     val username: String,
     val firstName: String,
     val lastName: String,
-    val icon: String,
-    val nickname: String
+    val icon: String?,
+    val nickname: String?
 )

@@ -1,5 +1,6 @@
 package jp.fukicycle.jashter.api.service
 
+import jp.fukicycle.jashter.api.dto.response.UserResponseDto
 import jp.fukicycle.jashter.api.model.User
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.security.oauth2.jwt.JwsHeader
@@ -33,7 +34,7 @@ class TokenService : ITokenService {
         return jwtEncoder.encode(JwtEncoderParameters.from(jwsHeader, claims)).tokenValue
     }
 
-    override fun parse(token: String): User? {
+    override fun parse(token: String): UserResponseDto? {
         return try {
             val jwt = jwtDecoder.decode(token)
             val userId = jwt.claims["userId"] as Long

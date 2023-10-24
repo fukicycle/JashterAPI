@@ -1,4 +1,4 @@
-package jp.fukicycle.jashter.api.dto
+package jp.fukicycle.jashter.api.dto.response
 
 data class QuestionResponseDto(
         val correctWordId: Long,

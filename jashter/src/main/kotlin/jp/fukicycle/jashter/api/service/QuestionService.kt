@@ -1,9 +1,8 @@
 package jp.fukicycle.jashter.api.service
 
-import jp.fukicycle.jashter.api.dto.QuestionChoice
-import jp.fukicycle.jashter.api.dto.QuestionResponseDto
+import jp.fukicycle.jashter.api.dto.response.QuestionChoice
+import jp.fukicycle.jashter.api.dto.response.QuestionResponseDto
 import jp.fukicycle.jashter.api.model.MeaningOfWord
-import jp.fukicycle.jashter.api.model.Word
 import jp.fukicycle.jashter.api.repsitory.IMeaningOfWordRepository
 import jp.fukicycle.jashter.api.repsitory.IWordRepository
 import org.springframework.beans.factory.annotation.Autowired

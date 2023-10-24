@@ -1,11 +1,8 @@
 package jp.fukicycle.jashter.api.controller
 
-import jp.fukicycle.jashter.api.dto.QuestionDto
-import jp.fukicycle.jashter.api.dto.QuestionResponseDto
-import jp.fukicycle.jashter.api.model.User
+import jp.fukicycle.jashter.api.dto.request.QuestionRequestDto
+import jp.fukicycle.jashter.api.dto.response.QuestionResponseDto
 import jp.fukicycle.jashter.api.service.IQuestionService
-import jp.fukicycle.jashter.api.service.QuestionService
-import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
 import org.springframework.security.core.Authentication
 import org.springframework.web.bind.annotation.GetMapping
@@ -19,7 +16,7 @@ class QuestionController(
         private val questionService: IQuestionService
 ) {
     @GetMapping("/get")
-    fun get(authentication: Authentication, @RequestBody questionDto: QuestionDto): ResponseEntity<List<QuestionResponseDto>> {
-        return ResponseEntity.ok(questionService.create(questionDto.levelId, questionDto.partOfSpeechId))
+    fun get(authentication: Authentication, @RequestBody questionRequestDto: QuestionRequestDto): ResponseEntity<List<QuestionResponseDto>> {
+        return ResponseEntity.ok(questionService.create(questionRequestDto.levelId, questionRequestDto.partOfSpeechId))
     }
 }

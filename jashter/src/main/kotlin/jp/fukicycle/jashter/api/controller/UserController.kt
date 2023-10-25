@@ -20,7 +20,7 @@ class UserController {
 
     @GetMapping("")
     fun get(authentication: Authentication): ResponseEntity<UserResponseDto> {
-        val user = authentication.principal as User
+        val user = authentication.principal as UserResponseDto
         return ResponseEntity.ok(userService.findById(user.id))
     }
 }

@@ -3,7 +3,6 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/.idea/jashter.iml" filepath="$PROJECT_DIR$/.idea/jashter.iml" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/jp.fukicycle.jashter.main.iml" filepath="$PROJECT_DIR$/.idea/modules/jp.fukicycle.jashter.main.iml" />
     </modules>
   </component>
 </project>

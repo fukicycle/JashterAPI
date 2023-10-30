@@ -16,22 +16,32 @@ class QuestionService : IQuestionService {
     override fun create(levelId: Long, partOfSpeechId: Long): List<QuestionResponseDto> {
         val items = mutableListOf<QuestionResponseDto>()
         val meaningOfWords = meaningOfWordRepository.findAllByLevelIdAndPartOfSpeechId(levelId, partOfSpeechId)
-        for (meaningOfWord in meaningOfWords) {
+        for (meaningOfWord in meaningOfWords.withIndex()) {
             val choice = mutableListOf<QuestionChoice>()
-            getRandomChoice(meaningOfWord.wordId, meaningOfWord.partOfSpeechId).forEach {
-                choice.add(QuestionChoice(it.wordId, it.id, it.meaning))
+            for (choiceItem in getRandomChoice(meaningOfWord.value.wordId, meaningOfWord.value.partOfSpeechId)) {
+                choice.add(QuestionChoice(choiceItem.wordId, choiceItem.id, choiceItem.meaning))
             }
-            choice.add(QuestionChoice(meaningOfWord.wordId, meaningOfWord.id, meaningOfWord.meaning))
+            choice.add(QuestionChoice(meaningOfWord.value.wordId, meaningOfWord.value.id, meaningOfWord.value.meaning))
             choice.shuffle()
-            items.add(QuestionResponseDto(meaningOfWord.wordId, meaningOfWord.id, levelId, partOfSpeechId, choice))
+            items.add(
+                QuestionResponseDto(
+                    meaningOfWord.value.wordId,
+                    meaningOfWord.value.id,
+                    levelId,
+                    partOfSpeechId,
+                    choice
+                )
+            )
+            if (meaningOfWord.index > 100) break
         }
         return items
     }
 
     private fun getRandomChoice(baseWordId: Long, partOfSpeechId: Long): List<MeaningOfWord> {
         val items = mutableListOf<MeaningOfWord>()
-        val meaningOfWords = meaningOfWordRepository.findAll().filter { a -> a.wordId != baseWordId && a.partOfSpeechId == partOfSpeechId }
-        var count = 0;
+        val meaningOfWords = meaningOfWordRepository.findAll()
+            .filter { a -> a.wordId != baseWordId && a.partOfSpeechId == partOfSpeechId }
+        var count = 0
         while (true) {
             val random = meaningOfWords.random()
             if (items.equals(random)) {

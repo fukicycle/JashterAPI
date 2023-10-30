@@ -37,17 +37,17 @@ jobs:
         run: |
           cd ./jashter
           ./gradlew build -x test
-      - name: Deploy
-        run: |
-          mkdir -p ~/.ssh && chmod 700 ~/.ssh
-          echo "$SSH_KEY" > ~/.ssh/id_rsa && chmod 600 ~/.ssh/id_rsa
-          ls ./jashter/build/libs
-          scp -i ~/.ssh/id_rsa -p $SSH_PORT ./jashter/build/libs/jashter-0.0.1-SNAPSHOT.jar $SSH_USER@$SSH_HOST:$DEPLOY_DIR
-          ssh -i ~/.ssh/id_rsa -p $SSH_PORT -l $SSH_USER $SSH_HOST deploy.sh
-        env:
-          SSH_KEY: ${{ secrets.SSH_KEY }}
-          SSH_HOST: ${{secrets.SSH_HOST}}
-          SSH_USER: ${{secrets.SSH_USER}}
-          SSH_PORT: ${{secrets.SSH_PORT}}
-          DEPLOY_DIR: ${{secrets.DEPLOY_DIR}}
+      # - name: Deploy
+      #   run: |
+      #     mkdir -p ~/.ssh && chmod 700 ~/.ssh
+      #     echo "$SSH_KEY" > ~/.ssh/id_rsa && chmod 600 ~/.ssh/id_rsa
+      #     ls ./jashter/build/libs
+      #     scp -i ~/.ssh/id_rsa -p $SSH_PORT ./jashter/build/libs/jashter-0.0.1-SNAPSHOT.jar $SSH_USER@$SSH_HOST:$DEPLOY_DIR
+      #     ssh -i ~/.ssh/id_rsa -p $SSH_PORT -l $SSH_USER $SSH_HOST deploy.sh
+      #   env:
+      #     SSH_KEY: ${{ secrets.SSH_KEY }}
+      #     SSH_HOST: ${{secrets.SSH_HOST}}
+      #     SSH_USER: ${{secrets.SSH_USER}}
+      #     SSH_PORT: ${{secrets.SSH_PORT}}
+      #     DEPLOY_DIR: ${{secrets.DEPLOY_DIR}}
 

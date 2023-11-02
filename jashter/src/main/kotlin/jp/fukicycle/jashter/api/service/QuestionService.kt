@@ -17,6 +17,7 @@ class QuestionService : IQuestionService {
         val items = mutableListOf<QuestionResponseDto>()
         val meaningOfWords = meaningOfWordRepository.findAllByLevelIdAndPartOfSpeechId(levelId, partOfSpeechId)
         for (meaningOfWord in meaningOfWords.withIndex()) {
+            if (meaningOfWord.index >= 100) break
             val choice = mutableListOf<QuestionChoice>()
             for (choiceItem in getRandomChoice(meaningOfWord.value.wordId, meaningOfWord.value.partOfSpeechId)) {
                 choice.add(QuestionChoice(choiceItem.wordId, choiceItem.id, choiceItem.meaning))
@@ -32,7 +33,6 @@ class QuestionService : IQuestionService {
                     choice
                 )
             )
-            if (meaningOfWord.index > 100) break
         }
         return items
     }
